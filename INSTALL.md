@@ -1,45 +1,38 @@
-# Hope//Punk Roll20 Pregens — Installation Guide
+# Hope//Punk Roll20 Pregens — INSTALL
 
-This guide explains how to install the Hope//Punk pregen pack in Roll20.
+This guide installs the Hope//Punk pregen pack into a Roll20 game.
 
-## 1. Download the repository
+## Current canonical script
 
-### Option A: GitHub ZIP
-
-1. Open the GitHub repository.
-2. Click **Code**.
-3. Click **Download ZIP**.
-4. Extract the ZIP locally.
-5. Open the extracted folder.
-
-The correct module root is the folder that directly contains:
+Use only this script:
 
 ```text
-README.md
-INSTALL.md
-data/
-portraits/
-tokens/
-roll20/
+roll20/hopepunk_roll20_pregen_importer.js
 ```
 
-### Option B: Git clone
+Do not also load old helper scripts such as:
 
-```bash
-git clone https://github.com/Frank-T-Johansen/HopePunk-Roll20-Pregens.git
-cd HopePunk-Roll20-Pregens
+```text
+hopepunk_roll20_pregen_asset_linker.js
+hopepunk_roll20_pregen_staging_namer.js
+hopepunk_roll20_armour_cyberware_trait_patch.js
 ```
 
-## 2. Confirm repository layout
+Those workflows are now integrated into the main importer.
+
+## Repository layout
 
 Expected layout:
 
 ```text
+README.md
+INSTALL.md
+
 data/
   hopepunk_pregens.json
 
 portraits/
-  *.png
+  *.png or *.jpg
 
 tokens/
   *.png
@@ -48,44 +41,56 @@ roll20/
   hopepunk_roll20_pregen_importer.js
 ```
 
-The importer contains embedded pregen data. The `data/hopepunk_pregens.json` file is useful for review, source control, and future regeneration, but Roll20 does not read it directly.
+The JSON file under `data/` is source/reference data. The Roll20 importer embeds the current pregen data directly, so Roll20 does not read `data/hopepunk_pregens.json` at runtime.
 
-## 3. Install the Roll20 importer
+If the JSON is edited later, regenerate or update the importer so the embedded data matches the JSON source.
 
-Open this file locally:
+## Install the importer
+
+1. Open the Roll20 game.
+2. Open **Game Settings**.
+3. Open **Mod Scripts** / **API Scripts**.
+4. Create or open the Hope//Punk pregen importer script.
+5. Paste the full contents of:
 
 ```text
 roll20/hopepunk_roll20_pregen_importer.js
 ```
 
-In Roll20:
+6. Save.
+7. Restart the API sandbox.
 
-1. Open the Hope//Punk game.
-2. Open **Game Settings**.
-3. Open **Mod Scripts** / **API Scripts**.
-4. Create a new script.
-5. Paste the full contents of `hopepunk_roll20_pregen_importer.js`.
-6. Save the script.
+Test:
 
-After saving, Roll20 should report that the script loaded.
+```text
+!hopepunk-pregens --help
+```
 
-## 4. Import the pregens
+The help output should mention:
 
-In Roll20 chat, run:
+```text
+--name-selected
+--link-selected-portraits
+--link-selected-tokens
+--token-size
+--keep-token-size
+```
+
+## Import character sheets
+
+Run:
 
 ```text
 !hopepunk-pregens --dry-run
 ```
 
-This shows what would be imported.
-
-If it looks correct, run:
+If it looks correct:
 
 ```text
 !hopepunk-pregens --import
 ```
 
-To refresh existing pregen sheets after updating the importer:
+To refresh existing sheets after updating the importer:
 
 ```text
 !hopepunk-pregens --overwrite
@@ -99,62 +104,67 @@ Lena Cross (Cat Burglar)
 Nika Voss (Cyber-Junkie)
 ```
 
-The Background suffix is intentional. It helps players browse the pregens.
+The Background suffix is intentional. It makes pregen selection easier. Players can rename their chosen character afterward.
 
-## 5. Upload portraits and tokens
+## Journal folder placement
 
-Upload the actual image files through the Roll20 Art Library.
+The importer currently does **not** place characters into the Roll20 `Pregens` folder automatically.
 
-Use:
+After import, move the generated pregen characters manually into the `Pregens` folder in the Journal.
 
-```text
-portraits/
-tokens/
-```
+This is a Roll20 Journal organization step. It does not affect character sheet data, portraits, or default tokens.
 
-Do not copy images from GitHub browser previews. Upload the local files from the extracted repository.
-
-## 6. Create staging pages
-
-Create one or two temporary Roll20 pages:
+Recommended Journal layout:
 
 ```text
-Asset Staging - Pregen Portraits
-Asset Staging - Pregen Tokens
+Pregens
+Characters
+NPCs
 ```
 
-These are utility pages used only for linking images to character sheets.
-
-## 7. Stage portrait graphics
-
-1. Open `Asset Staging - Pregen Portraits`.
-2. Drag uploaded portrait images from the Art Library onto the tabletop.
-3. Rename placed graphics so their names match the character names.
-
-Good names:
+Move these generated entries into `Pregens`:
 
 ```text
 Marcus Vale (Bounty Hunter)
 Lena Cross (Cat Burglar)
-Nika Voss (Cyber-Junkie)
+...
 Cass Vega (Washed Up Rocker)
 ```
 
-The importer accepts some simpler aliases, such as the character's plain name, but exact names are safest.
+## Upload and stage portraits
 
-## 8. Link portraits
+Roll20 Art Library folder handling is unreliable for bulk uploads. Use staging pages as the reliable organization method.
 
-Select the staged portrait graphics.
+Create a Roll20 page:
 
-Dry run first:
+```text
+Asset Staging - Pregen Portraits
+```
+
+On that page:
+
+1. Select the **TOKENS** layer.
+2. Drag the portrait image files from your local `portraits/` folder directly onto the tabletop/canvas.
+3. Select the placed portrait graphics.
+
+If Roll20 created unnamed graphics, run:
+
+```text
+!hopepunk-pregens --name-selected --dry-run
+```
+
+Check that the proposed order is correct. The order is top-to-bottom, then left-to-right.
+
+If it is correct:
+
+```text
+!hopepunk-pregens --name-selected
+```
+
+Then link portraits:
 
 ```text
 !hopepunk-pregens --link-selected-portraits --dry-run
-```
-
-If the matches are correct:
-
-```text
 !hopepunk-pregens --link-selected-portraits
 ```
 
@@ -164,108 +174,129 @@ To replace existing avatars:
 !hopepunk-pregens --link-selected-portraits --overwrite
 ```
 
-## 9. Stage token graphics
+## Upload and stage tokens
 
-1. Open `Asset Staging - Pregen Tokens`.
-2. Drag uploaded token images from the Art Library onto the tabletop.
-3. Rename placed graphics so their names match the character names.
+Create a Roll20 page:
 
-Use the same naming style as for portraits.
+```text
+Asset Staging - Pregen Tokens
+```
 
-## 10. Link default tokens
+On that page:
 
-Select the staged token graphics.
+1. Select the **TOKENS** layer.
+2. Drag the token image files from your local `tokens/` folder directly onto the tabletop/canvas.
+3. Select the placed token graphics.
 
-Dry run first:
+If Roll20 created unnamed graphics, run:
+
+```text
+!hopepunk-pregens --name-selected --dry-run
+```
+
+If the proposed order is correct:
+
+```text
+!hopepunk-pregens --name-selected
+```
+
+Then link default tokens:
 
 ```text
 !hopepunk-pregens --link-selected-tokens --dry-run
-```
-
-If the matches are correct:
-
-```text
 !hopepunk-pregens --link-selected-tokens
 ```
 
-To replace existing default tokens:
+By default, linked default tokens are normalized to one Roll20 grid cell:
 
 ```text
-!hopepunk-pregens --link-selected-tokens --overwrite
+70 × 70 px
 ```
 
-## 11. Combined linking option
+To explicitly set one-cell tokens:
 
-If the same staged image should be used as both portrait and default token:
+```text
+!hopepunk-pregens --link-selected-tokens --overwrite --token-size 70
+```
+
+To make two-cell tokens:
+
+```text
+!hopepunk-pregens --link-selected-tokens --overwrite --token-size 140
+```
+
+To preserve the staged token size instead:
+
+```text
+!hopepunk-pregens --link-selected-tokens --overwrite --keep-token-size
+```
+
+## Testing default tokens
+
+After token linking:
+
+1. Delete any old test token already on the map.
+2. Drag a pregen character from the Journal onto a normal map page.
+3. Confirm the dropped token is one grid cell and uses the token art.
+
+Existing placed tokens do not automatically update when a character's default token changes. Drag a fresh token from the Journal after relinking.
+
+## Combined asset linking
+
+If the same selected graphics should be both portrait and default token:
 
 ```text
 !hopepunk-pregens --link-selected-assets --dry-run
 !hopepunk-pregens --link-selected-assets
 ```
 
-The cleaner setup is usually:
+The cleaner workflow is usually:
 
 ```text
 portraits/ -> --link-selected-portraits
 tokens/    -> --link-selected-tokens
 ```
 
-## 12. Assign player control
+## Assign player control
 
-Pregens are visible to all players, but nobody controls them by default.
+Imported pregens are visible to all players, but are not controlled by anyone by default.
 
 After a player chooses a pregen:
 
 1. Open the character sheet as GM.
 2. Set **Can Be Edited & Controlled By** to that player.
 3. Optionally rename the character and remove the Background suffix.
-4. Optionally move the character into a player-character folder.
+4. Optionally move the character from `Pregens` to an active player-character folder.
 
-## 13. Updating an existing Roll20 game
+## Troubleshooting
 
-If you update the importer script in Roll20, use:
+### `!hopepunk-pregens --help` gives no output
 
-```text
-!hopepunk-pregens --overwrite
-```
+Open the Roll20 API output console. The script probably crashed. Fix the error, save the script, and restart the API sandbox.
 
-This refreshes the character sheet attributes from the embedded data.
+### Asset linking says `No match: (unnamed graphic)`
 
-If you also want to replace portraits or default tokens, rerun the relevant linking command with `--overwrite`:
+The staged graphics have no Roll20 object names.
 
-```text
-!hopepunk-pregens --link-selected-portraits --overwrite
-!hopepunk-pregens --link-selected-tokens --overwrite
-```
-
-## 14. Troubleshooting
-
-### The command does nothing
-
-Check that the importer is installed as a Roll20 Mod/API script and that the script sandbox is running.
-
-### Characters imported, but portraits are missing
-
-Roll20 scripts cannot upload local images. Upload portraits manually first, drag them onto a staging page, select them, then run the linking command.
-
-### A graphic says "No match"
-
-Rename the placed graphic to match the character entry, for example:
+Run:
 
 ```text
-Marcus Vale (Bounty Hunter)
+!hopepunk-pregens --name-selected --dry-run
+!hopepunk-pregens --name-selected
 ```
 
-Then run the dry-run command again.
+Then retry linking.
 
-### Default tokens are wrong or old
+### Tokens are too large
 
-Run the token linking command with `--overwrite`:
+Use the current importer and relink tokens:
 
 ```text
-!hopepunk-pregens --link-selected-tokens --overwrite
+!hopepunk-pregens --link-selected-tokens --overwrite --token-size 70
 ```
 
-### I moved `hopepunk_pregens.json` into `data/`
+Then delete old placed test tokens and drag fresh ones from the Journal.
 
-That is fine. The importer embeds the data directly. Only regeneration/update tooling needs to know where the JSON source file lives.
+### Portraits are large PNGs
+
+Large portrait PNGs can be converted to JPG before upload to reduce load for older laptops. Keep tokens as PNG if they use transparency.
