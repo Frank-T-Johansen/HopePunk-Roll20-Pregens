@@ -1,0 +1,2 @@
+node --check hopepunk_roll20_pregen_importer_v0_7.js: OK
+node --check hopepunk_roll20_armour_cyberware_trait_patch_v0_7.js: OK

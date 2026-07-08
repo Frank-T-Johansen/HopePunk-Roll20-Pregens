@@ -1,0 +1,31 @@
+character,background,section,slot,item,summary,trait_1,trait_2,trait_3,trait_4
+Marcus Vale,Bounty Hunter,armour,1,Long Reinforced Duster,Medium,MEDIUM,N/A,N/A,N/A
+Marcus Vale,Bounty Hunter,armour,2,Ballistic Vest,"Light, Accessory",LIGHT,ACCESSORY,N/A,N/A
+Marcus Vale,Bounty Hunter,cyberware,1,Facial Recognition Scanner,"Cyberware, Sensor",CYBERWARE,SENSOR,N/A,N/A
+Lena Cross,Cat Burglar,armour,1,Skintight Catsuit,"Light, Near-Silent",LIGHT,NEAR-SILENT,N/A,N/A
+Lena Cross,Cat Burglar,cyberware,1,Black Market lockpicks,"Cyberware, Hacking Enabled, Sabotage +1",CYBERWARE,HACKING ENABLED,N/A,N/A
+Lena Cross,Cat Burglar,cyberware,2,Jailbroken Augs,Cyberware,CYBERWARE,N/A,N/A,N/A
+Adrian Holt,Corporate Security,armour,1,Patched-up Riot Armour,Heavy,HEAVY,N/A,N/A,N/A
+Adrian Holt,Corporate Security,cyberware,1,Corp-grade Augs,"Cyberware, Thermal Vision, HUD Time/Map Overlay",CYBERWARE,N/A,N/A,N/A
+Nika Voss,Cyber-Junkie,cyberware,1,Custom Cyberdeck,"Cyberware, Hacking Enabled",CYBERWARE,HACKING ENABLED,N/A,N/A
+Salim Reyes,Desert Courier,armour,1,Riding Suit,Light,LIGHT,N/A,N/A,N/A
+Salim Reyes,Desert Courier,cyberware,1,Aftermarket Augs,Cyberware,CYBERWARE,N/A,N/A,N/A
+Dana Kaur,Ex-Military,armour,1,Dated Armoured Jacket,Medium,MEDIUM,N/A,N/A,N/A
+Dana Kaur,Ex-Military,cyberware,1,Dated Mil-grade Augs,"Cyberware, HUD Time/Map Overlay",CYBERWARE,N/A,N/A,N/A
+Dana Kaur,Ex-Military,cyberware,2,Armoured Prosthetic Limb,"Cyberware, Damage Negation +1",CYBERWARE,N/A,N/A,N/A
+Milo Rask,Gambler on the Run,cyberware,1,Jailbroken Augs,Cyberware,CYBERWARE,N/A,N/A,N/A
+Rosa Tan,Grease Monkey,cyberware,1,Mech-con Augs,"Cyberware, Hacking Enabled",CYBERWARE,HACKING ENABLED,N/A,N/A
+Jax Morrow,Gutter Rat Orphan,cyberware,1,Black Market lockpicks,"Cyberware, Hacking Enabled, Sabotage +1",CYBERWARE,HACKING ENABLED,N/A,N/A
+Jax Morrow,Gutter Rat Orphan,cyberware,2,Aftermarket Augs,Cyberware,CYBERWARE,N/A,N/A,N/A
+Ilya Novak,Mesh Hacker,cyberware,1,Jailbroken Augs,Cyberware,CYBERWARE,N/A,N/A,N/A
+Ilya Novak,Mesh Hacker,cyberware,2,Custom Cyberdeck,"Cyberware, Hacking Enabled",CYBERWARE,HACKING ENABLED,N/A,N/A
+Talia Cruz,Pilot,armour,1,Haptic Bodysuit,Light,LIGHT,N/A,N/A,N/A
+Talia Cruz,Pilot,cyberware,1,Full-connect hovercraft Augs,"Cyberware, Piloting +1 (Hover vehicles only)",CYBERWARE,N/A,N/A,N/A
+Emi Laurent,Piss-Poor Artist,cyberware,1,Jailbroken Augs,Cyberware,CYBERWARE,N/A,N/A,N/A
+Kenji Park,Samurai Otaku,cyberware,1,Corp-grade Augs,"Cyberware, Thermal Vision, HUD Time/Map Overlay",CYBERWARE,N/A,N/A,N/A
+Petra Vance,Scavenger,cyberware,1,Aftermarket Augs,Cyberware,CYBERWARE,N/A,N/A,N/A
+Noor Bellamy,Student Dropout,cyberware,1,School-grade Brain-Interface Aug,Cyberware,CYBERWARE,N/A,N/A,N/A
+Tomasz Iversen,Underground Fighter,cyberware,1,Augmented Scanner,"Cyberware, Sensor",CYBERWARE,SENSOR,N/A,N/A
+Tomasz Iversen,Underground Fighter,cyberware,2,Adrenaline Stim,"Cyberware, once per Combat, gain 10 Feet of Movement as a Free Action",CYBERWARE,N/A,N/A,N/A
+Cass Vega,Washed Up Rocker,cyberware,1,Musician Augs,"Cyberware, Performance +1",CYBERWARE,N/A,N/A,N/A
+Cass Vega,Washed Up Rocker,cyberware,2,Aural Cyberware,"Cyberware, Sensor, Sonic-Resistant",CYBERWARE,SENSOR,N/A,N/A
